@@ -1,0 +1,48 @@
+<h3><%= viewTitle %></h3>
+
+<form action="/lic" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="<%= typeof _id != 'undefined' ? _id : lic._id %>">
+    <div class="form-group">
+        <label for="">RECORD ID</label>
+        <input type="text" class="form-control" name="rid" placeholder="RECORD ID" value="<%= typeof rid != 'undefined' ? rid : lic.rid %>">
+        <div class="text-danger">
+            <%= typeof ridError != 'undefined' ? ridError : '' %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="">CA NAME</label>
+        <input type="text" class="form-control" name="CANAME" placeholder="CA NAME" value="<%= typeof CANAME != 'undefined' ? CANAME : lic.CANAME %>">
+        <div class="text-danger">
+            <%= typeof CANAMEError != 'undefined' ? CANAMEError : '' %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="">CA NO</label>
+        <input type="text" class="form-control" name="CANO" placeholder="CA NO" value="<%= typeof CANO != 'undefined' ? CANO: lic.CANO %>">
+    </div>
+    <div class="form-group">
+        <label for="">LOA NO</label>
+        <input type="text" class="form-control" name="LOANO" placeholder="LOA NO" value="<%= typeof LOANO != 'undefined' ? LOANO: lic.LOANO %>">
+    </div>
+    <div class="form-group">
+        <label for="">START DATE</label>
+        <input type="text" class="form-control" name="SDATE" placeholder="START DATE" value="<%= typeof SDATE != 'undefined' ? SDATE: lic.SDATE %>">
+    </div>
+    <div class="form-group">
+        <label for="">END DATE</label>
+        <input type="date" class="form-control" name="EDATE" placeholder="END DATE" value="<%= typeof EDATE != 'undefined' ? EDATE: lic.EDATE %>">
+    </div>
+    <div class="form-group">
+        <label for="">VALUE</label>
+        <input type="text" class="form-control" name="VAL" placeholder="VALUE" value="<%= typeof VAL != 'undefined' ? VAL: lic.VAL %>">
+    </div>
+    <div class="form-group">
+        <label for="">USER NAME</label>
+        <input type="text" class="form-control" name="usern" placeholder="USER NAME" value="<%= user.name %>">
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a href="/lic/list" class="btn btn-success"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>

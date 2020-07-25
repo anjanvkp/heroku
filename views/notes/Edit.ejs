@@ -1,0 +1,24 @@
+<h3 class="text-center"><%= viewTitle %></h3>
+
+<form action="/notes" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="<%= typeof _id != 'undefined' ? _id : notes._id %>">
+    <div class="form-group">
+        <label for="">DATE</label>
+        <input type="date" class="form-control" name="DT" placeholder="DATE" value="<%= typeof DT != 'undefined' ? DT : notes.DT %>">
+        <div class="text-danger">
+            <%= typeof DTError != 'undefined' ? DTError : '' %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="">NOTE</label>
+        <textarea class="form-control" name="NOTE" rows="15" cols="12"><%= typeof NOTE != 'undefined' ? NOTE : notes.NOTE %></textarea>
+        <div class="text-danger">
+            <%= typeof NOTEError != 'undefined' ? NOTEError : '' %>
+        </div>
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a href="/notes/list" class="btn btn-success"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>

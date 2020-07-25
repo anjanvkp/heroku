@@ -1,0 +1,57 @@
+<div class="input-group mb-3">
+    <a href="/exp/add" class="btn btn-info btn-xs" id="btnADD"><i class="fa fa-plus"></i> Add New</a>
+    <div class="input-group-prepend">
+        <div class="input-group-text">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+    </div>
+    <input type="text" class="form-control" id="sr" placeholder="Serach Text Here" />
+    <div class="input-group-prepend">
+        <div class="input-group-text">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>
+    </div>
+    <input type="date" id="dtfrm" class="form-control" />
+    <div class="input-group-prepend">
+        <div class="input-group-text">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>
+    </div>
+    <input type="date" id="dtto" class="form-control" /> &nbsp;
+    <a href="#" class="btn btn-warning btn-xs" id="btnADD"><i class="fa fa-search" aria-hidden="true"></i> Fetch</a>
+    &nbsp;
+    <a href="#" class="btn btn-danger btn-xs" id="btnEXL"><i class="fa fa-file-excel-o" aria-hidden="true"></i>
+        Export</a>
+</div>
+<table class="table table-bordered table-hover" id="jqGrid">
+    <tr>
+        <th>ID</th>
+        <th>DATE</th>
+        <th>MODE</th>
+        <th>PAID TO</th>
+        <th>COST CENTER</th>
+        <th>GROUP</th>
+        <th>VALUE</th>
+        <th>ACTION</th>
+    </tr>
+    <% for(var i=0; i < list.length; i++) { %>
+    <tr>
+        <td><%= list[i].rid %></td>
+        <td><%= list[i].dt %></td>
+        <td><%= list[i].mode %></td>
+        <td><%= list[i].pto %></td>
+        <td><%= list[i].head %></td>
+        <td><%= list[i].grp %></td>
+        <td><%= list[i].amt %></td>
+        <td>
+            <a href="/exp/<%= list[i]._id %>" class="text-info"><i class="fas fa-pencil-alt"></i></a> &nbsp; | &nbsp;
+            <a href="/exp/delete/<%= list[i]._id %>" onclick="return confirm('Are you sure to delete this record?');"
+                class="text-danger"><i class="far fa-trash-alt"></i></a>
+        </td>
+    </tr>
+    <% } %>
+</table>
+
+<script src="/js/exp/search_table.js"></script>
+<script src="/js/jquery.table2excel.js"></script>
+<script src="/js/exp/tbl2_exl.js"></script>

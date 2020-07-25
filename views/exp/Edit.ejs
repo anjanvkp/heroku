@@ -1,0 +1,67 @@
+<h3 class="text-center"><%= viewTitle %></h3>
+
+<form action="/exp" method="post">
+    <input type="hidden" name="_id" value="<%= typeof _id != 'undefined' ? _id : exp._id %>">
+    <table class="table table-bordered">
+        <tr>
+            <td colspan="2">
+                <div class="form-group">
+                    <label for="">RECORD ID</label>
+                    <input type="text" class="form-control" name="rid"
+                        value="<%= exp.rid %>" readonly>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="">DATE</label>
+                    <input type="text" class="form-control" name="dt"
+                        value="<%= typeof dt != 'undefined' ? dt : exp.dt %>">
+                </div>
+                <div class="form-group">
+                    <label for="">MODE</label>
+                    <input type="text" class="form-control" placeholder="PAYMENT MODE" name="mode"
+                        value="<%= typeof mode != 'undefined' ? mode : exp.mode %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="">PAID TO</label>
+                    <input type="text" class="form-control" placeholder="PAID TO" name="pto"
+                        value="<%= typeof pto != 'undefined' ? pto : exp.pto %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="">COST CENTER</label>
+                    <input type="text" class="form-control" placeholder="COST CENTER" name="head"
+                        value="<%= typeof head != 'undefined' ? head : exp.head %>">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label for="">GROUP</label>
+                    <input type="text" class="form-control" placeholder="GROUP" name="grp"
+                        value="<%= typeof grp != 'undefined' ? grp : exp.grp %>">
+                </div>
+                <div class="form-group">
+                    <label for="">AMOUNT</label>
+                    <input type="number" class="form-control" placeholder="AMOUNT" name="amt"
+                        value="<%= typeof amt != 'undefined' ? amt : exp.amt %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="">PAYMENT PURPOSE</label>
+                    <input type="text" class="form-control" placeholder="PAYMENT PURPOSE" name="purp"
+                        value="<%= typeof purp != 'undefined' ? purp : exp.purp %>">
+                </div>
+                <div class="form-group">
+                    <label for="">PAYMENT TYPE</label>
+                    <input type="text" class="form-control" placeholder="PAYMENT TYPE" name="type"
+                        value="<%= typeof type != 'undefined' ? type : exp.type %>">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a href="/exp" class="btn btn-success"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>

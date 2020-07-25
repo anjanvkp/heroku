@@ -1,0 +1,222 @@
+<h3 class="text-center"><%= viewTitle %></h3>
+
+<section class="container py-2">
+    <div class="row">
+        <div class="col-md-12">
+            <ul id="tabsJustified" class="nav nav-tabs nav-fill">
+                <li class="nav-item"><a href="" data-target="#pmt" data-toggle="tab" class="nav-link small text-uppercase active">PAYMENTS</a></li>
+                <li class="nav-item"><a href="" data-target="#trf" data-toggle="tab" class="nav-link small text-uppercase">TRANSFERS</a></li>
+                <li class="nav-item"><a href="" data-target="#rec" data-toggle="tab" class="nav-link small text-uppercase">RECEIPTS</a></li>
+            </ul>
+            <div id="tabsJustifiedContent" class="tab-content">
+                <div id="pmt" class="tab-pane fade active show">
+                    <form action="/exp" method="post">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td colspan="2">
+                                    <input type="hidden" name="_id" value="<%= typeof _id != 'undefined' ? _id : '' %>">
+                                    <div class="form-group">
+                                        <label for="">RECORD ID</label>
+                                        <input type="text" class="form-control" name="rid" placeholder="RECORD ID" value="<%= tm %>" readonly>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="">DATE</label>
+                                        <input type="date" class="form-control" name="dt">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">MODE</label>
+                                        <input required type="text" class="form-control" placeholder="PAYMENT MODE" name="mode" list="modes">
+                                        <datalist id="modes">
+                                            <% list.forEach((list, index)=>{%>
+                                            <option id=<%= list.rid%>>
+                                                <%= list.mode%></option>
+                                            <%})%>
+                                        </datalist>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">PAID TO</label>
+                                        <input required type="text" class="form-control" placeholder="PAID TO" name="pto" list="ptos">
+                                        <datalist id="ptos">
+                                            <% list.forEach((list, index)=>{%>
+                                            <option id=<%= list.rid%>>
+                                                <%= list.pto%></option>
+                                            <%})%>
+                                        </datalist>
+                                        <div class="text-danger">
+                                            <%= typeof ptoError != 'undefined' ? ridError : '' %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">COST CENTER</label>
+                                        <input type="text" class="form-control" placeholder="COST CENTER" name="head" list="heads">
+                                        <datalist id="heads">
+                                            <% list.forEach((list, index)=>{%>
+                                            <option id=<%= list.rid%>>
+                                                <%= list.head%></option>
+                                            <%})%>
+                                        </datalist>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="">GROUP</label>
+                                        <input type="text" class="form-control" placeholder="GROUP" name="grp" list="grps">
+                                        <datalist id="grps">
+                                            <% list.forEach((list, index)=>{%>
+                                            <option id=<%= list.rid%>>
+                                                <%= list.grp%></option>
+                                            <%})%>
+                                        </datalist>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">AMOUNT</label>
+                                        <input required type="number" class="form-control" placeholder="AMOUNT" name="amt">
+                                        <div class="text-danger">
+                                            <%= typeof amtError != 'undefined' ? ridError : '' %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">PAYMENT PURPOSE</label>
+                                        <textarea class="form-control" name="purp" required rows="5" cols="4"></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" name="type" value="PMT">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                            <a href="/exp" class="btn btn-success"><i class="fa fa-list-alt"></i> View All</a>
+                        </div>
+                    </form>
+                </div>
+                <div id="trf" class="tab-pane fade">
+                    <form action="/exp/trf" method="post">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td colspan="2">
+                                    <input type="hidden" name="_id" value="<%= typeof _id != 'undefined' ? _id : '' %>">
+                                    <div class="form-group">
+                                        <label for="">RECORD ID</label>
+                                        <input type="text" class="form-control" name="rid" placeholder="RECORD ID" value="<%= tm %>" readonly>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="">DATE</label>
+                                        <input type="date" class="form-control" name="dt">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">TRANSFER FROM</label>
+                                        <input required type="text" class="form-control" placeholder="TRANSFER FROM" name="mode" list="modes">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">TRANSFER TO</label>
+                                        <input required type="text" class="form-control" placeholder="TRANSFER TO" name="pto" list="ptos">
+                                        <div class="text-danger">
+                                            <%= typeof ptoError != 'undefined' ? ridError : '' %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">COST CENTER</label>
+                                        <input type="text" class="form-control" placeholder="COST CENTER" name="head" list="heads" readonly>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="">GROUP</label>
+                                        <input type="text" class="form-control" placeholder="GROUP" name="grp" list="grps" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">AMOUNT</label>
+                                        <input required type="number" class="form-control" placeholder="AMOUNT" name="amt">
+                                        <div class="text-danger">
+                                            <%= typeof amtError != 'undefined' ? ridError : '' %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">TRANSFER PURPOSE</label>
+                                        <textarea class="form-control" name="purp" required rows="5" cols="4"></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" name="type" value="TRF">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                            <a href="/exp" class="btn btn-success"><i class="fa fa-list-alt"></i> View All</a>
+                        </div>
+                    </form>
+                </div>
+                <div id="rec" class="tab-pane fade">
+                    <form action="/exp" method="post">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td colspan="2">
+                                    <input type="hidden" name="_id" value="<%= typeof _id != 'undefined' ? _id : '' %>">
+                                    <div class="form-group">
+                                        <label for="">RECORD ID</label>
+                                        <input type="text" class="form-control" name="rid" placeholder="RECORD ID" value="<%= tm %>" readonly>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="">DATE</label>
+                                        <input type="date" class="form-control" name="dt">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">MODE</label>
+                                        <input required type="text" class="form-control" placeholder="RECEIPT MODE" name="mode" list="modes">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">RECEIPT FROM</label>
+                                        <input required type="text" class="form-control" placeholder="RECEIPT FROM" name="pto" list="ptos">
+                                        <div class="text-danger">
+                                            <%= typeof ptoError != 'undefined' ? ridError : '' %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">COST CENTER</label>
+                                        <input type="text" class="form-control" placeholder="COST CENTER" name="head" list="heads">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="">GROUP</label>
+                                        <input type="text" class="form-control" placeholder="GROUP" name="grp" list="grps">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">AMOUNT</label>
+                                        <input required type="number" class="form-control" placeholder="AMOUNT" name="amt" min="-9999999" max="-1">
+                                        <div class="text-danger">
+                                            <%= typeof amtError != 'undefined' ? ridError : '' %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">RECEIPT DESCRIPTION</label>
+                                        <textarea class="form-control" name="purp" required rows="5" cols="4"></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" name="type" value="REC">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                            <a href="/exp" class="btn btn-success"><i class="fa fa-list-alt"></i> View All</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

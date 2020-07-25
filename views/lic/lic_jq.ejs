@@ -1,0 +1,37 @@
+<h3><a href="/lic/add" class="btn btn-info btn-sm" id="btnADD"><i class="fa fa-plus"></i>Add New</a> Lic List</h3>
+<div id="lstTable"></div>
+<input type="text" id="chkacc"/>
+<script>
+    var ACCCANAME = [];
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: '/lic_jq/list',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                var dt = "<table class='table table-bordered'><tr><th>ID</th><th>CANAME</th><th>CA NO</th><th>LOA NO</th><th>START DATE</th><th>END DATE</th><th>VALUE</th><th>ACTION</th></tr>";
+                $.each(data, function (i, x) {
+                    dt += "<tr>";
+                    dt += "<td>" + x.rid + "</td>";
+                    dt += "<td>" + x.CANAME + "</td>";
+                    dt += "<td>" + x.CANO + "</td>";   
+                    dt += "<td>" + x.LOANO + "</td>";
+                    dt += "<td>" + x.SDATE + "</td>";
+                    dt += "<td>" + x.EDATE + "</td>"; 
+                    dt += "<td>" + x.VAL + "</td>";
+                    dt += "<td></td>";
+                    dt += "</tr>";
+                    ACCCANAME.push(x.CANAME);
+                });
+                $("#lstTable").append(dt);
+            },
+            error: function(e){
+                alert(JSON.stringify(e));
+            }
+        });
+        $("#chkacc").autocomplete({
+      source: ACCCANAME
+    });
+    });
+</script>
